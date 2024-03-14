@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,8 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
   #[Route("/home", methods: ['GET'])]
-  public function index(): Response
+  public function index(LoggerInterface $logger): Response
   {
+    $logger->info("Acessou a home");
+
     return $this->render('home/home.html.twig', [
       'name' => 'tarique',
       'categories' => $this->listaCategorias()
